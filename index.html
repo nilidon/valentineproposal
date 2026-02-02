@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <audio id="bg-music" loop>
+      <source src="song.mp3" type="audio/mpeg" />
+    </audio>
+    <div class="open-overlay" id="open-overlay" role="button" tabindex="0">
+      <p class="open-overlay__text">Tap to open ❤️</p>
+    </div>
+    <div class="bg-hearts" aria-hidden="true"></div>
+
+    <main class="page">
+      <section class="card" role="region" aria-live="polite">
+        <div class="screen screen--active" id="screen-intro">
+          <p class="photo-caption">my favorite photo &amp; my favorite person</p>
+          <div class="photo-frame">
+            <img class="photo" src="us.jpeg" alt="Us together" />
+          </div>
+          <p class="eyebrow">Hey baby…</p>
+          <h1 class="title">
+            I have a very important question for you 💭
+          </h1>
+          <button class="btn btn--primary" id="continue-btn" type="button">
+            Continue
+          </button>
+        </div>
+
+        <div class="screen" id="screen-game">
+          <h2 class="title" id="game-title"></h2>
+          <p class="game-intro" id="game-intro"></p>
+          <p class="game-spell-hint" id="game-spell-hint"></p>
+          <p class="game-word-display" id="game-word-display" aria-live="polite"></p>
+          <div class="game-zone" id="game-zone"></div>
+          <div class="game-done" id="game-done">
+            <p class="game-done-message" id="game-done-message"></p>
+            <button class="btn btn--primary" id="game-continue-btn" type="button">
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <div class="screen" id="screen-question">
+          <p class="photo-caption">my favorite photo &amp; my favorite person</p>
+          <div class="photo-frame">
+            <img class="photo" src="us.jpeg" alt="Us together" />
+          </div>
+          <h2 class="title title--big">
+            Joelie Rae, will you be my Valentine? ❤️
+          </h2>
+          <div class="button-row" id="button-row">
+            <button class="btn btn--primary" id="yes-btn" type="button">
+              Yes 💖
+            </button>
+            <button class="btn btn--ghost" id="no-btn" type="button">
+              No 💔
+            </button>
+            <span class="no-placeholder" id="no-placeholder" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="screen" id="screen-success">
+          <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+          <h2 class="title title--big">LET'S GO!!! 💘</h2>
+          <p class="subtitle">
+            You just made me the happiest boyfriend alive.
+          </p>
+          <p class="subtitle subtitle--soft">
+            Thank you for being mine 😘
+          </p>
+          <button class="btn btn--primary" id="surprise-btn" type="button">
+            A Digital Letter
+          </button>
+          <div class="surprise" id="surprise-area">
+            <div class="book-wrap">
+              <div class="book" id="book">
+                <div class="book-cover">
+                  <span class="book-cover__title">A Digital Letter</span>
+                  <span class="book-cover__heart">💕</span>
+                </div>
+                <div class="book-content">
+                  <div class="book-content__scroll">
+                    <div class="letter" id="surprise-poem">
+                    <h2 class="letter__title">A Recognition Spoken in Peace</h2>
+                    <p>I want you to be the one in a way that goes beyond reason. Something in me recognized you long before I tried to explain it. Loving you never felt like a choice, I didn't fall in love alone. Love fell into me before my conscious mind could name it. It entered quietly, moved through me like returning to a home I didn't remember leaving, like a memory from before memory existed. You felt familiar because you spoke to parts of me I didn't know I had lived with my whole life. And in giving it room, I realized I wasn't just feeling love, I was becoming it, because with you I could be anything, and everything it asked of me. It chose me as its place, and in finding somewhere to stay, it took your shape, because somehow, from the very beginning, it had known your name.</p>
+              <p>You aren't just someone I love, you are my someone, for life. There were moments when loving you asked more of me than comfort. I didn't always get it right. I know there were times when I failed you, especially when your love was most open and mine was less careful than it should have been. I only came to understand through the pain I caused you. You stayed until I learned, and I promise to stay forever. I stopped wishing you into permanence and began creating it, not through hope alone, but through loving you in a way that changed how I live, how I listen, how I stay. Not only because the thought of losing you scared me, but because understanding what you deserve made loving you feel like the most natural way to move through the world, and love became a way of being.</p>
+              <p>What we have now feels quieter, and that quiet is not absence, it is peace. Loving you no longer feels like holding my breath for the waves, but like laying beside the ocean once the tide has settled. You are not a dream I keep chasing. You are a dream come true, a presence that doesn't ask me to prove anything, only to be honest and steady. The future doesn't resist us anymore because it's no longer blurry. It's shared between us, built from small moments that don't need witnesses to be meaningful. The quiet choices, the everyday care, the moments that matter when no one is watching.</p>
+              <p>If the future feels possible to me now, it's because you're in it. Not as an idea, not as a hope I have to force into shape, but as a truth that unfolds naturally, quietly, steadily. I feel you meeting me here. I feel you choosing this too. I feel your care in it. I see the way you're showing me.</p>
+              <p>So this is not a promise made in excitement. It's a recognition spoken in peace.</p>
+              <p><strong>I promise to always choose you</strong></p>
+              <p>Because being loved by you has changed the way I see the world.<br>Because your care stays with me long after the moment passes.<br>Because when something good happens, you're who I want to tell first, and when something is heavy, you're who I want beside me.<br>Because when I think of love lasting, it looks like you.<br>Because I want my mornings to begin with you, before the day has the chance to ask anything of me.<br>Because loving you finally doesn't feel like wishing, it feels like recognizing something already meant to be.<br>Because when I imagine growing older, it isn't the years that comfort me, it's the thought of sharing them with you.</p>
+              <p>Loving you feels like choosing patience, laughter, and warmth... again and again... until one day I realize that this choosing has become the life I want.</p>
+                    <p class="letter__sign-off">forever yours, nilidon</p>
+                    <p class="letter__date" id="letter-date"></p>
+                    </div>
+                  </div>
+                  <button class="letter-fullscreen-btn" id="letter-fullscreen-btn" type="button" title="Full screen" aria-label="Full screen">
+                    <svg class="letter-fullscreen-btn__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="caption caption--bottom" id="broken-caption">
+          The Grinch keeps stealing the NO button
+        </p>
+      </section>
+    </main>
+
+    <div class="letter-fullscreen" id="letter-fullscreen" aria-hidden="true">
+      <div class="letter-fullscreen__hearts" id="letter-fullscreen-hearts" aria-hidden="true"></div>
+      <button class="letter-fullscreen__close" id="letter-fullscreen-close" type="button" title="Close">×</button>
+      <div class="letter-fullscreen__content letter" id="letter-fullscreen-content"></div>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
