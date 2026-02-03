@@ -432,17 +432,13 @@ const startBgMusic = () => {
 };
 
 if (openOverlay) {
-  const hideOverlay = () => {
-    startBgMusic();
-    openOverlay.classList.add("open-overlay--hidden");
-    showScreen(screens.intro);
-    startGame();
-  };
-  openOverlay.addEventListener("click", hideOverlay);
-  openOverlay.addEventListener("touchstart", hideOverlay, { passive: true });
+  openOverlay.classList.add("open-overlay--hidden");
 }
 
+
+
 continueBtn.addEventListener("click", () => {
+  startBgMusic();
   showScreen(screens.question);
   ignoreFirstHover = true;
   warmUpConfettiCanvas();
