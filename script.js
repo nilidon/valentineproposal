@@ -434,9 +434,6 @@ const startBgMusic = () => {
 if (openOverlay) {
   openOverlay.classList.add("open-overlay--hidden");
 }
-showScreen(screens.question);
-warmUpConfettiCanvas();
-
 
 
 continueBtn.addEventListener("click", () => {
@@ -453,7 +450,6 @@ if (gameContinueBtn) {
 }
 
 yesBtn.addEventListener("click", () => {
-  startBgMusic();
   showScreen(screens.success);
   brokenCaption.classList.remove("caption--show");
   startConfetti();
