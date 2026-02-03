@@ -1,4 +1,4 @@
-const HER_NAME = "Joelie Rae";
+const CONFIG = typeof window.VALENTINE_CONFIG !== "undefined" ? window.VALENTINE_CONFIG : {};
 
 const screens = {
   intro: document.getElementById("screen-intro"),
@@ -14,7 +14,6 @@ const noPlaceholder = document.getElementById("no-placeholder");
 const brokenCaption = document.getElementById("broken-caption");
 const buttonRow = document.getElementById("button-row");
 const card = document.querySelector(".card");
-const herName = document.getElementById("her-name");
 const surpriseBtn = document.getElementById("surprise-btn");
 const surpriseArea = document.getElementById("surprise-area");
 const bookEl = document.getElementById("book");
@@ -26,6 +25,7 @@ const letterFullscreenHearts = document.getElementById("letter-fullscreen-hearts
 const surprisePoem = document.getElementById("surprise-poem");
 const confettiCanvas = document.getElementById("confetti-canvas");
 const bgMusic = document.getElementById("bg-music");
+const bgMusicSource = document.getElementById("bg-music-source");
 const openOverlay = document.getElementById("open-overlay");
 const gameZone = document.getElementById("game-zone");
 const gameDone = document.getElementById("game-done");
@@ -36,15 +36,10 @@ const gameSpellHint = document.getElementById("game-spell-hint");
 const gameWordDisplay = document.getElementById("game-word-display");
 const gameDoneMessage = document.getElementById("game-done-message");
 
-const SPELL_WORD = "JOELIE RAE";
-const GAME_TITLE = "Pop quiz time 💕";
-const GAME_INTRO = "The most beautiful girl there is.";
-const GAME_HINT = "Tap the letters in the right order.";
-const GAME_COMPLETE_MSG = "That's you. My beautiful girlfriend 💖";
+const SPELL_WORD = CONFIG.spellWord || "VALENTINE";
+const captionTexts = [CONFIG.noButtonCaption != null ? CONFIG.noButtonCaption : "The Grinch keeps stealing the NO button"];
 
 let spellNextIndex = 0;
-
-const captionTexts = ["The Grinch keeps stealing the NO button"];
 
 let dodgeCount = 0;
 let noIsAbsolute = false;
@@ -69,9 +64,9 @@ const startGame = () => {
   spellNextIndex = 0;
   if (gameDone) gameDone.classList.remove("game-done--show");
   gameZone.innerHTML = "";
-  if (gameTitle) gameTitle.textContent = GAME_TITLE;
-  if (gameIntro) gameIntro.textContent = GAME_INTRO;
-  if (gameSpellHint) gameSpellHint.textContent = GAME_HINT;
+  if (gameTitle) gameTitle.textContent = CONFIG.gameTitle || "Pop quiz time 💕";
+  if (gameIntro) gameIntro.textContent = CONFIG.gameIntro || "";
+  if (gameSpellHint) gameSpellHint.textContent = CONFIG.gameHint || "Tap the letters in the right order.";
   const buildDisplay = (nextIdx) => {
     return word
       .split("")
@@ -153,7 +148,7 @@ const startGame = () => {
         gameWordDisplay.textContent = buildDisplay(spellNextIndex);
       }
       if (spellNextIndex >= word.length && gameDone) {
-        if (gameDoneMessage) gameDoneMessage.textContent = GAME_COMPLETE_MSG;
+        if (gameDoneMessage) gameDoneMessage.textContent = CONFIG.gameCompleteMessage || "That's you. My beautiful girlfriend 💖";
         gameDone.classList.add("game-done--show");
       }
     });
@@ -432,12 +427,17 @@ const startBgMusic = () => {
 };
 
 if (openOverlay) {
-  openOverlay.classList.add("open-overlay--hidden");
+  const hideOverlay = () => {
+    startBgMusic();
+    openOverlay.classList.add("open-overlay--hidden");
+    showScreen(screens.game);
+    startGame();
+  };
+  openOverlay.addEventListener("click", hideOverlay);
+  openOverlay.addEventListener("touchstart", hideOverlay, { passive: true });
 }
 
-
 continueBtn.addEventListener("click", () => {
-  startBgMusic();
   showScreen(screens.question);
   ignoreFirstHover = true;
   warmUpConfettiCanvas();
@@ -528,18 +528,66 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-if (herName) {
-  herName.textContent = HER_NAME || "there";
+function initContent() {
+  if (!CONFIG || Object.keys(CONFIG).length === 0) return;
+  document.title = "Be My Valentine";
+  const openOverlayText = document.getElementById("open-overlay-text");
+  if (openOverlayText) openOverlayText.textContent = CONFIG.openOverlayText != null ? CONFIG.openOverlayText : "Tap to open ❤️";
+  const introCaption = document.getElementById("intro-photo-caption");
+  if (introCaption) introCaption.textContent = CONFIG.photoCaption != null ? CONFIG.photoCaption : "";
+  const introPhoto = document.getElementById("intro-photo");
+  if (introPhoto) {
+    introPhoto.src = CONFIG.photoPath || "";
+    introPhoto.alt = CONFIG.photoAlt != null ? CONFIG.photoAlt : "";
+  }
+  const introEyebrow = document.getElementById("intro-eyebrow");
+  if (introEyebrow) introEyebrow.textContent = CONFIG.introEyebrow != null ? CONFIG.introEyebrow : "";
+  const introTitle = document.getElementById("intro-title");
+  if (introTitle) introTitle.textContent = CONFIG.introTitle != null ? CONFIG.introTitle : "";
+  const questionCaption = document.getElementById("question-photo-caption");
+  if (questionCaption) questionCaption.textContent = CONFIG.photoCaption != null ? CONFIG.photoCaption : "";
+  const questionPhoto = document.getElementById("question-photo");
+  if (questionPhoto) {
+    questionPhoto.src = CONFIG.photoPath || "";
+    questionPhoto.alt = CONFIG.photoAlt != null ? CONFIG.photoAlt : "";
+  }
+  const questionText = document.getElementById("question-text");
+  if (questionText) questionText.textContent = CONFIG.questionText != null ? CONFIG.questionText : "";
+  const successTitle = document.getElementById("success-title");
+  if (successTitle) successTitle.textContent = CONFIG.successTitle != null ? CONFIG.successTitle : "";
+  const successSubtitle1 = document.getElementById("success-subtitle1");
+  if (successSubtitle1) successSubtitle1.textContent = CONFIG.successSubtitle1 != null ? CONFIG.successSubtitle1 : "";
+  const successSubtitle2 = document.getElementById("success-subtitle2");
+  if (successSubtitle2) successSubtitle2.textContent = CONFIG.successSubtitle2 != null ? CONFIG.successSubtitle2 : "";
+  if (surpriseBtn) surpriseBtn.textContent = CONFIG.letterButtonLabel != null ? CONFIG.letterButtonLabel : "A Digital Letter";
+  const bookCoverTitle = document.getElementById("book-cover-title");
+  if (bookCoverTitle) bookCoverTitle.textContent = CONFIG.bookTitle != null ? CONFIG.bookTitle : "A Digital Letter";
+  if (brokenCaption) brokenCaption.textContent = CONFIG.noButtonCaption != null ? CONFIG.noButtonCaption : "";
+  if (bgMusic && bgMusicSource && CONFIG.musicPath) {
+    bgMusicSource.src = CONFIG.musicPath;
+    bgMusic.load();
+  }
+  if (surprisePoem && Array.isArray(CONFIG.letterParagraphs)) {
+    let letterHtml = "";
+    if (CONFIG.letterTitle) {
+      letterHtml += "<h2 class=\"letter__title\">" + escapeHtml(CONFIG.letterTitle) + "</h2>";
+    }
+    CONFIG.letterParagraphs.forEach(function (para) {
+      letterHtml += "<p>" + para + "</p>";
+    });
+    const signOff = CONFIG.letterSignOff != null ? CONFIG.letterSignOff : "";
+    letterHtml += "<p class=\"letter__sign-off\">" + signOff + "</p>";
+    surprisePoem.innerHTML = letterHtml;
+  }
 }
 
-const letterDateEl = document.getElementById("letter-date");
-if (letterDateEl) {
-  letterDateEl.textContent = new Date().toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
 }
+
+initContent();
 
 launchHearts();
 warmUpConfettiCanvas();
