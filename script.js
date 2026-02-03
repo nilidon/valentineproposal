@@ -435,7 +435,7 @@ if (openOverlay) {
   const hideOverlay = () => {
     startBgMusic();
     openOverlay.classList.add("open-overlay--hidden");
-    showScreen(screens.game);
+    showScreen(screens.intro);
     startGame();
   };
   openOverlay.addEventListener("click", hideOverlay);
